@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
 import "./styles.css";
 import { Link } from "react-router-dom";
+import api from "../../service/api";
 
 
 class UserForm extends Component {
+
+  state = {
+    nome: "",
+    cargo: "",
+    email: "",
+    loading: false
+  }
+
+  handleChange = ({target}) => {
+
+    this.setState({[target.name]: target.value});
+  
+  }
+
+  saveUser = async() => {
+    const { nome, cargo, email } = this.state;
+    this.setState({loading:true});
+    try {
+      const response = await api.post("/user", {nome, cargo,email});
+      console.log(response.data);
+      this.setState({loading:false});
+    } catch (error) {
+      console.log(error);
+      this.setState({loading:false});
+    }
+  }
+
   render() {
     return (
       <div className="myContainer">
@@ -11,19 +39,20 @@ class UserForm extends Component {
         <h4 className="myControl">Queremos saber quem é você!</h4>
   
         <form className="myForm">
-          <div class="form-group">
-            <label for="nome">Qual o seu nome?</label>
-            <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Digite seu nome"></input>
+          <div className="form-group">
+            <label htmlFor="nome">Qual o seu nome?</label>
+            <input name="nome" onChange={this.handleChange} type="text" className="form-control" id="nome" aria-describedby="emailHelp" placeholder="Digite seu nome"></input>
           </div>
-          <div class="form-group">
-            <label for="email">Qual o seu email?</label>
-            <input type="email" class="form-control" id="email" placeholder="name@example.com"></input>
+          <div className="form-group">
+            <label htmlFor="email">Qual o seu email?</label>
+            <input name="email" onChange={this.handleChange} type="email" className="form-control" id="email" placeholder="name@example.com"></input>
           </div>
           
   
-          <div class="form-group">
-          <label for="exampleFormControlSelect2">Qual é o seu cargo?</label>
-          <select class="form-control" id="exampleFormControlSelect2">
+          <div className="form-group">
+          <label htmlFor="exampleFormControlSelect2">Qual é o seu cargo?</label>
+          <select name="cargo" onChange={this.handleChange} className="form-control" id="exampleFormControlSelect2">
+            <option></option>
             <option>CEO</option>
             <option>Diretor</option>
             <option>Estudante</option>
@@ -32,8 +61,8 @@ class UserForm extends Component {
           </div>
         </form>
         <footer className="mySpacingContainer">
-          <Link to="/" class="btn btn-primary btn-lg">Voltar</Link>
-          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+          <Link to="/" className="btn btn-primary btn-lg">Voltar</Link>
+          <Link to="/persona" className="btn btn-primary btn-lg" onClick={this.saveUser}> {this.state.loading ? ( <div class="spinner-border" role="status"></div> ) : "Avançar" }</Link>
         </footer>
   
       </div>
