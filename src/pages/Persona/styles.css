@@ -1,0 +1,21 @@
+.imagesBox {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px 0px 10px 0px;
+  width: 80%;
+}
+
+.imagePersona {
+  width: 300px;
+  opacity: 0.8;
+}
+
+.imgBackground {
+  margin: 5px;
+}
+
+.imgBackgroundBlue {
+  background-color: blue;
+  margin: 5px;
+}
