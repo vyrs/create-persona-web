@@ -12,7 +12,7 @@ class SecondForm extends Component {
             <div className="form-group">
               <label htmlFor="nome">Onde sua persona trabalha:</label>
               <input 
-                name="trabalho" 
+                name="where_works" 
                 onChange={this.props.handleChange} 
                 type="text" 
                 className="form-control" 
@@ -37,7 +37,7 @@ class SecondForm extends Component {
 
             <div className="form-group">
               <label htmlFor="communication">Quais os meios de comunicação usados pela Persona:</label>
-              <input name="communication" onChange={this.props.handleChange} type="text" className="form-control" id="communication" aria-describedby="emailHelp"></input>
+              <input name="communication_means" onChange={this.props.handleChange} type="text" className="form-control" id="communication" aria-describedby="emailHelp"></input>
             </div>
 
            

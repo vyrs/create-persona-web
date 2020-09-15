@@ -15,17 +15,17 @@ class PersonasList extends Component {
       render() {
         return (
           <div className="imagesBox">
-          {linksPersonas.map(persona => {
-            const isSlected = persona.link === this.props.image ? true : false; // this.props.image acessa é estado da imagem na index, isso é possível pq passamos o image={this.state.image} na redenrização dessa pg na index
-            return (
-              <div className={isSlected ? "imgBackgroudBlue" : "imgBackground"} key={persona.link} onClick={() => this.props.selectImage(persona.link)}>
-                <img 
-                className="imagePersona"
-                src={persona.link} 
-                alt="foto de persona"/>
-              </div>
-            )
-          })}
+            {linksPersonas.map(persona => {
+              const isSelected = persona.link === this.props.image? true : false; // this.props.image acessa é estado da imagem na index, isso é possível pq passamos o image={this.state.image} na redenrização dessa pg na index
+              return (
+                <div className={isSelected? "imgBackgroundBlue" : "imgBackground"} key={persona.link} onClick={() => this.props.selectImage(persona.link)}>
+                  <img 
+                  className="imagePersona"
+                  src={persona.link} 
+                  alt="foto de persona"/>
+                </div>
+              )
+            })}
         </div>
         );
       }    

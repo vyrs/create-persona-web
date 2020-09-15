@@ -26,8 +26,15 @@ class UserForm extends Component {
       const response = await api.post("/user", {nome, cargo,email});
       console.log(response.data);
       this.setState({loading:false});
+
+      return this.props.history.push(`/persona/${response.data.user._id}`); // esse history vem quando usamos as rotas no routes.js
+
     } catch (error) {
-      console.log(error);
+      if(error.status === 401) {
+        if(error.data.user) { // se o erro possui as informações do usuario ou seja se encontrar um usario que já tem aquele email
+          return this.props.history.push(`/persona/${error.data.user._id}`); // depois manda para a pagina de criar personas com o id do usuario que já existe
+        }
+      }
       this.setState({loading:false});
     }
   }
@@ -62,7 +69,11 @@ class UserForm extends Component {
         </form>
         <footer className="mySpacingContainer">
           <Link to="/" className="btn btn-primary btn-lg">Voltar</Link>
-          <Link to="/persona" className="btn btn-primary btn-lg" onClick={this.saveUser}> {this.state.loading ? ( <div class="spinner-border" role="status"></div> ) : "Avançar" }</Link>
+          {/* <Link to="/persona" className="btn btn-primary btn-lg" onClick={this.saveUser}> {this.state.loading ? ( <div class="spinner-border" role="status"></div> ) : "Avançar" }</Link> */}
+
+          <button type="submit" className="btn btn-primary btn-lg" onClick={this.saveUser}> 
+            {this.state.loading ? ( <div className="spinner-border" role="status"></div> ) : "Avançar" }</button>
+
         </footer>
   
       </div>
