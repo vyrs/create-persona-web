@@ -77,6 +77,8 @@ class Persona extends Component {
         image, });
       console.log(response.data);
 
+      return this.props.history.push(`/showpersona/${response.data.persona._id}`); // response.data.persona._id ou seja vai pegar o id da persana criada e vai para a pagina /showpersona/id com as informações dela
+
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +104,7 @@ class Persona extends Component {
     const { renderForm } = this.state;
 
     if(renderForm === 1 && n === -1) {
-      return;
+      return this.props.history.push("/user"); // para voltar para a pagina de usuario
     } else if(renderForm === 5 && n === 1) {
       this.savePersona();
     } else {

@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 
 const api = create({
-  baseURL:"http://localhost:4000"
+  baseURL:"https://minha-api-node-startec.herokuapp.com/"
 });
 
 api.addResponseTransform(response => {
